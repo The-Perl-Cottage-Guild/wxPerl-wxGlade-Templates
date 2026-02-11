@@ -1,0 +1,442 @@
+<?xml version="1.0"?>
+<!-- PuTTY Session view (tight layout) for wxGlade 1.1.1 / wxPerl
+     UPDATED: narrower tree / wider main area -->
+
+<application class="MyApp" encoding="UTF-8" for_version="3.0"
+  header_extension=".h" indent_amount="4" indent_symbol="space"
+  is_template="0" language="perl" mark_blocks="1" name="app"
+  option="0" overwrite="1" path="putty_session.pl" source_extension=".cpp"
+  top_window="frame_putty" use_gettext="0" use_new_namespace="1">
+
+  <object class="PuttySessionFrame" name="frame_putty" base="EditFrame">
+    <title>PuTTY Configuration</title>
+    <size>812, 520</size>
+    <style>wxDEFAULT_FRAME_STYLE</style>
+
+    <object class="wxPanel" name="panel_main" base="EditPanel">
+      <style>wxTAB_TRAVERSAL</style>
+
+      <object class="wxBoxSizer" name="sizer_root" base="EditBoxSizer">
+        <orient>wxVERTICAL</orient>
+
+        <!-- Splitter region -->
+        <object class="sizeritem">
+          <option>1</option>
+          <border>6</border>
+          <flag>wxALL|wxEXPAND</flag>
+
+          <object class="wxSplitterWindow" name="splitter_main" base="EditSplitterWindow">
+            <style>wxSP_3D|wxSP_LIVE_UPDATE</style>
+
+            <!-- force initial split: narrower left -->
+            <sashpos>160</sashpos>
+            <min_pane_size>120</min_pane_size>
+
+            <!-- LEFT: Category tree -->
+            <object class="wxPanel" name="panel_left" base="EditPanel">
+              <style>wxTAB_TRAVERSAL</style>
+              <minsize>140,-1</minsize>
+
+              <object class="wxBoxSizer" name="sizer_left" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <object class="sizeritem">
+                  <option>0</option>
+                  <border>4</border>
+                  <flag>wxALL</flag>
+                  <object class="wxStaticText" name="lbl_category" base="EditStaticText">
+                    <label>Category:</label>
+                  </object>
+                </object>
+
+                <object class="sizeritem">
+                  <option>1</option>
+                  <border>4</border>
+                  <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                  <object class="wxTreeCtrl" name="tree_category" base="EditTreeCtrl">
+                    <style>wxTR_HAS_BUTTONS|wxTR_LINES_AT_ROOT|wxBORDER_SUNKEN</style>
+                  </object>
+                </object>
+
+              </object>
+            </object>
+
+            <!-- RIGHT: Session page -->
+            <object class="wxPanel" name="panel_right" base="EditPanel">
+              <style>wxTAB_TRAVERSAL</style>
+
+              <object class="wxBoxSizer" name="sizer_right" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <!-- Basic options -->
+                <object class="sizeritem">
+                  <option>0</option>
+                  <border>4</border>
+                  <flag>wxALL|wxEXPAND</flag>
+
+                  <object class="wxStaticBoxSizer" name="box_basic" base="EditStaticBoxSizer">
+                    <label>Basic options for your PuTTY session</label>
+                    <orient>wxVERTICAL</orient>
+
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxALL</flag>
+                      <object class="wxStaticText" name="lbl_dest" base="EditStaticText">
+                        <label>Specify the destination you want to connect to</label>
+                      </object>
+                    </object>
+
+                    <!-- Host / Port grid -->
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                      <object class="wxFlexGridSizer" name="grid_hostport" base="EditFlexGridSizer">
+                        <rows>0</rows>
+                        <cols>3</cols>
+                        <hgap>6</hgap>
+                        <vgap>4</vgap>
+                        <growable_cols>1</growable_cols>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxStaticText" name="lbl_host" base="EditStaticText">
+                            <label>Host Name (or IP address)</label>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>1</option>
+                          <flag>wxEXPAND</flag>
+                          <object class="wxTextCtrl" name="txt_host" base="EditTextCtrl"/>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxBoxSizer" name="sizer_port" base="EditBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <flag>wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxStaticText" name="lbl_port" base="EditStaticText">
+                                <label>Port</label>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <border>4</border>
+                              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxTextCtrl" name="txt_port" base="EditTextCtrl">
+                                <size>60,-1</size>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                    <!-- Connection type line -->
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                      <object class="wxBoxSizer" name="sizer_conn" base="EditBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxStaticText" name="lbl_conn" base="EditStaticText">
+                            <label>Connection type:</label>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>10</border>
+                          <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_ssh" base="EditRadioButton">
+                            <label>SSH</label>
+                            <style>wxRB_GROUP</style>
+                            <checked>1</checked>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>10</border>
+                          <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_serial" base="EditRadioButton">
+                            <label>Serial</label>
+                            <checked>0</checked>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>10</border>
+                          <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_other" base="EditRadioButton">
+                            <label>Other:</label>
+                            <checked>0</checked>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>6</border>
+                          <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxChoice" name="choice_other" base="EditChoice">
+                            <choices>
+                              <choice>Telnet</choice>
+                              <choice>Rlogin</choice>
+                              <choice>Raw</choice>
+                            </choices>
+                            <selection>0</selection>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>1</option>
+                          <flag>wxEXPAND</flag>
+                          <object class="spacer" name="spacer_conn" base="EditSpacer">
+                            <size>1,1</size><width>1</width><height>1</height>
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                  </object>
+                </object>
+
+                <!-- Saved sessions -->
+                <object class="sizeritem">
+                  <option>1</option>
+                  <border>4</border>
+                  <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                  <object class="wxStaticBoxSizer" name="box_saved" base="EditStaticBoxSizer">
+                    <label>Load, save or delete a stored session</label>
+                    <orient>wxVERTICAL</orient>
+
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxALL|wxEXPAND</flag>
+
+                      <object class="wxFlexGridSizer" name="grid_saved" base="EditFlexGridSizer">
+                        <rows>0</rows>
+                        <cols>2</cols>
+                        <hgap>10</hgap>
+                        <vgap>6</vgap>
+                        <growable_cols>0</growable_cols>
+
+                        <!-- left: label + list -->
+                        <object class="sizeritem">
+                          <option>1</option>
+                          <flag>wxEXPAND</flag>
+
+                          <object class="wxBoxSizer" name="sizer_saved_left" base="EditBoxSizer">
+                            <orient>wxVERTICAL</orient>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <flag>wxEXPAND</flag>
+                              <object class="wxStaticText" name="lbl_saved_sessions" base="EditStaticText">
+                                <label>Saved Sessions</label>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>1</option>
+                              <border>4</border>
+                              <flag>wxTOP|wxEXPAND</flag>
+                              <object class="wxListBox" name="list_sessions" base="EditListBox">
+                                <choices>
+                                  <choice>Default Settings</choice>
+                                  <choice>carpenter</choice>
+                                  <choice>gold</choice>
+                                  <choice>mike</choice>
+                                </choices>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                        <!-- right: buttons -->
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <flag>wxEXPAND</flag>
+
+                          <object class="wxBoxSizer" name="sizer_saved_btns" base="EditBoxSizer">
+                            <orient>wxVERTICAL</orient>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <flag>wxEXPAND</flag>
+                              <object class="wxButton" name="btn_load" base="EditButton">
+                                <label>Load</label>
+                                <size>88,-1</size>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <border>6</border>
+                              <flag>wxTOP|wxEXPAND</flag>
+                              <object class="wxButton" name="btn_save" base="EditButton">
+                                <label>Save</label>
+                                <size>88,-1</size>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option>
+                              <border>6</border>
+                              <flag>wxTOP|wxEXPAND</flag>
+                              <object class="wxButton" name="btn_delete" base="EditButton">
+                                <label>Delete</label>
+                                <size>88,-1</size>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>1</option>
+                              <flag>wxEXPAND</flag>
+                              <object class="spacer" name="spacer_saved_btns" base="EditSpacer">
+                                <size>1,1</size><width>1</width><height>1</height>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                    <!-- Close window on exit -->
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                      <object class="wxStaticBoxSizer" name="box_close" base="EditStaticBoxSizer">
+                        <label>Close window on exit:</label>
+                        <orient>wxHORIZONTAL</orient>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>8</border>
+                          <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_close_always" base="EditRadioButton">
+                            <label>Always</label>
+                            <style>wxRB_GROUP</style>
+                            <checked>0</checked>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>8</border>
+                          <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_close_never" base="EditRadioButton">
+                            <label>Never</label>
+                            <checked>0</checked>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option>
+                          <border>8</border>
+                          <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxRadioButton" name="rb_close_clean" base="EditRadioButton">
+                            <label>Only on clean exit</label>
+                            <checked>1</checked>
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                  </object>
+                </object>
+
+              </object>
+            </object>
+
+          </object>
+        </object>
+
+        <!-- Bottom button row -->
+        <object class="sizeritem">
+          <option>0</option>
+          <border>6</border>
+          <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+          <object class="wxBoxSizer" name="sizer_bottom" base="EditBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <flag>wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxButton" name="btn_about" base="EditButton">
+                <label>About</label>
+                <size>88,-1</size>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>6</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxButton" name="btn_help" base="EditButton">
+                <label>Help</label>
+                <size>88,-1</size>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>1</option>
+              <flag>wxEXPAND</flag>
+              <object class="spacer" name="spacer_bottom" base="EditSpacer">
+                <size>1,1</size><width>1</width><height>1</height>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <flag>wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxButton" name="btn_open" base="EditButton">
+                <label>Open</label>
+                <size>88,-1</size>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>6</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxButton" name="btn_cancel" base="EditButton">
+                <label>Cancel</label>
+                <size>88,-1</size>
+              </object>
+            </object>
+
+          </object>
+        </object>
+
+      </object>
+    </object>
+  </object>
+</application>
