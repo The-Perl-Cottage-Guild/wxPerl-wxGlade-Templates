@@ -21,7 +21,7 @@ Gallery of Example GUIs:
 
 # NHC Advisory Exporer
 
-This one is actually implemented and there is a Windows EXE that has been [released](https://github.com/StormSurgeLive/nhc-advisory-gui).
+This one is actually implemented and there is a Windows EXE that has a working [Windows release (exe)](https://github.com/StormSurgeLive/nhc-advisory-gui/releases).
 
 ![image](https://github.com/user-attachments/assets/0ef50655-841f-420f-be33-60c26a7cf721)
 
