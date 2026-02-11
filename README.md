@@ -3,3 +3,10 @@ These are to be used as examples and starting points for wxPerl projects using w
 To set up the wxPerl environment on Windows, please see this page:
 
 https://wiki.perl-guilds.net/index.php?title=Developing_and_Distributing_wxPerl_Applications_on_Windows
+
+Example GUI Gallery of GUIs:
+
+<img width="805" height="517" alt="image" src="https://github.com/user-attachments/assets/c2e41b87-48d2-4269-8d8e-75a4861a78f7" />
+
+<img width="937" height="624" alt="image" src="https://github.com/user-attachments/assets/0082bccb-7731-4d4b-bb55-de2c0b12f49a" />
+
