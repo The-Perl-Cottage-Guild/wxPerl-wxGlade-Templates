@@ -19,6 +19,10 @@ Gallery of Example GUIs:
 # WS-FTP Clone
 <img width="937" height="624" alt="image" src="https://github.com/user-attachments/assets/0082bccb-7731-4d4b-bb55-de2c0b12f49a" />
 
+# Limewire
+
+<img width="1106" height="761" alt="image" src="https://github.com/user-attachments/assets/8d65a2e5-0472-4bb0-8c64-f87ddea9ec1b" />
+
 # NetCDF Explorer (intended to be bundled with Strawberry Perl's PDL Distro)
 
 <img width="976" height="639" alt="image" src="https://github.com/user-attachments/assets/da42b521-1b7a-491b-afb2-cd1f7f35c386" />
