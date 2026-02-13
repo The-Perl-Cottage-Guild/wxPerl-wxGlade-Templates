@@ -1,0 +1,371 @@
+<?xml version="1.0"?>
+<!-- wxGlade 1.1.1 (wxPerl) - BSPI basic search + big results -->
+
+<application class="MyApp" encoding="UTF-8" for_version="3.0" header_extension=".h"
+             indent_amount="4" indent_symbol="space" is_template="0" language="perl"
+             mark_blocks="1" name="app" option="0" overwrite="1"
+             path="bspi.pl" source_extension=".cpp" top_window="frame_bspi"
+             use_gettext="0" use_new_namespace="1">
+
+    <object class="BSPIMainFrame" name="frame_bspi" base="EditFrame">
+        <size>1200, 900</size>
+        <title>BoyScoutPatch.info - Desktop Client</title>
+        <style>wxDEFAULT_FRAME_STYLE</style>
+
+        <object class="wxPanel" name="panel_root" base="EditPanel">
+            <style>wxTAB_TRAVERSAL</style>
+
+            <object class="wxBoxSizer" name="sizer_root" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <!-- Basic Query (no advanced params) -->
+                <object class="sizeritem">
+                    <option>0</option>
+                    <border>8</border>
+                    <flag>wxALL|wxEXPAND</flag>
+
+                    <object class="wxStaticBoxSizer" name="box_query" base="EditStaticBoxSizer">
+                        <label>Query</label>
+                        <orient>wxVERTICAL</orient>
+
+                        <!-- Date from/to row -->
+                        <object class="sizeritem">
+                            <option>0</option>
+                            <border>6</border>
+                            <flag>wxALL|wxEXPAND</flag>
+
+                            <object class="wxBoxSizer" name="sizer_dates" base="EditBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_date_from" base="EditStaticText">
+                                        <label>Date from</label>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxTextCtrl" name="txt_date_from" base="EditTextCtrl">
+                                        <size>90,-1</size>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxButton" name="btn_pick_from" base="EditButton">
+                                        <label>...</label>
+                                        <size>28,22</size>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>10</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_date_to" base="EditStaticText">
+                                        <label>to</label>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxTextCtrl" name="txt_date_to" base="EditTextCtrl">
+                                        <size>90,-1</size>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxButton" name="btn_pick_to" base="EditButton">
+                                        <label>...</label>
+                                        <size>28,22</size>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="spacer" name="sp_dates" base="EditSpacer">
+                                        <size>1,1</size>
+                                        <width>1</width>
+                                        <height>1</height>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxButton" name="btn_search_hide" base="EditButton">
+                                        <label>Search &amp; Hide</label>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxButton" name="btn_search" base="EditButton">
+                                        <label>Search</label>
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- Basic fields -->
+                        <object class="sizeritem">
+                            <option>0</option>
+                            <border>6</border>
+                            <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                            <object class="wxFlexGridSizer" name="grid_basic" base="EditFlexGridSizer">
+                                <rows>0</rows>
+                                <cols>2</cols>
+                                <vgap>6</vgap>
+                                <hgap>10</hgap>
+                                <growable_cols>1</growable_cols>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_mode" base="EditStaticText">
+                                        <label>Search Mode</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxChoice" name="choice_mode" base="EditChoice">
+                                        <choices>
+                                            <choice>All Words</choice>
+                                            <choice>Any Words</choice>
+                                            <choice>Exact Phrase</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_listed_as" base="EditStaticText">
+                                        <label>Listed as</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxChoice" name="choice_listed_as" base="EditChoice">
+                                        <choices>
+                                            <choice>Any</choice>
+                                            <choice>Auction Only</choice>
+                                            <choice>Buy It Now</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_sold" base="EditStaticText">
+                                        <label>Sold Status</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxChoice" name="choice_sold" base="EditChoice">
+                                        <choices>
+                                            <choice>Any</choice>
+                                            <choice>Sold Only</choice>
+                                            <choice>Unsold Only</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_sellers" base="EditStaticText">
+                                        <label>Seller(s)</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxTextCtrl" name="txt_sellers" base="EditTextCtrl"/>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_item_ids" base="EditStaticText">
+                                        <label>Item Id(s)</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxTextCtrl" name="txt_item_ids" base="EditTextCtrl"/>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option><border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_index" base="EditStaticText">
+                                        <label>Search Index</label>
+                                    </object>
+                                </object>
+                                <object class="sizeritem">
+                                    <option>1</option><border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="wxChoice" name="choice_index" base="EditChoice">
+                                        <choices>
+                                            <choice>Scouting Memorabilia</choice>
+                                            <choice>OA Lodge Flaps</choice>
+                                            <choice>Council CSP</choice>
+                                            <choice>All</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- Footer row: Show / Order / Refine -->
+                        <object class="sizeritem">
+                            <option>0</option>
+                            <border>6</border>
+                            <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                            <object class="wxBoxSizer" name="sizer_footer" base="EditBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_show" base="EditStaticText">
+                                        <label>Show</label>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxChoice" name="choice_show" base="EditChoice">
+                                        <choices>
+                                            <choice>100</choice>
+                                            <choice>250</choice>
+                                            <choice>500</choice>
+                                            <choice>1000</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>12</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_order" base="EditStaticText">
+                                        <label>Order by</label>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxChoice" name="choice_order" base="EditChoice">
+                                        <choices>
+                                            <choice>Date</choice>
+                                            <choice>Price</choice>
+                                            <choice>Bids</choice>
+                                            <choice>Seller</choice>
+                                        </choices>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>0</border>
+                                    <flag>wxEXPAND</flag>
+                                    <object class="spacer" name="sp_footer" base="EditSpacer">
+                                        <size>1,1</size>
+                                        <width>1</width>
+                                        <height>1</height>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>0</border>
+                                    <flag>wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxTextCtrl" name="txt_refine" base="EditTextCtrl">
+                                        <size>260,-1</size>
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                    <object class="wxStaticText" name="lbl_refine" base="EditStaticText">
+                                        <label>Refine</label>
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                    </object>
+                </object>
+
+                <!-- Results = BIG (this is what grows) -->
+                <object class="sizeritem">
+                    <option>1</option>
+                    <border>8</border>
+                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                    <object class="wxStaticBoxSizer" name="box_results" base="EditStaticBoxSizer">
+                        <label>Results</label>
+                        <orient>wxVERTICAL</orient>
+
+                        <object class="sizeritem">
+                            <option>1</option>
+                            <border>6</border>
+                            <flag>wxALL|wxEXPAND</flag>
+                            <object class="wxListCtrl" name="list_results" base="EditListCtrl">
+                                <style>wxLC_REPORT|wxLC_SINGLE_SEL|wxBORDER_SUNKEN</style>
+                            </object>
+                        </object>
+
+                    </object>
+                </object>
+
+                <object class="sizeritem">
+                    <option>0</option>
+                    <border>8</border>
+                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                    <object class="wxStaticText" name="lbl_status" base="EditStaticText">
+                        <label>Ready.</label>
+                    </object>
+                </object>
+
+            </object>
+        </object>
+
+    </object>
+</application>
