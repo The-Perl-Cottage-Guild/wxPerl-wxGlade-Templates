@@ -1,0 +1,940 @@
+<?xml version="1.0"?>
+<!-- LimeWire-ish multi-tab UI skeleton - wxGlade 1.1.1 compatible (wxPerl) -->
+
+<application
+    class="MyApp"
+    encoding="UTF-8"
+    for_version="3.0"
+    header_extension=".h"
+    indent_amount="4"
+    indent_symbol="space"
+    is_template="0"
+    language="perl"
+    mark_blocks="1"
+    name="app"
+    option="0"
+    overwrite="1"
+    path="limewire.pl"
+    source_extension=".cpp"
+    top_window="frame_lime"
+    use_gettext="0"
+    use_new_namespace="1">
+
+    <object class="LimeFrame" name="frame_lime" base="EditFrame">
+        <title>LimeWire</title>
+        <size>1100,750</size>
+        <style>wxDEFAULT_FRAME_STYLE</style>
+        <menubar>1</menubar>
+
+        <!-- MENUBAR -->
+        <object class="wxMenuBar" name="menubar_main" base="EditMenuBar">
+            <menus>
+                <menu label="File"       name="menu_file"/>
+                <menu label="View"       name="menu_view"/>
+                <menu label="Navigation" name="menu_nav"/>
+                <menu label="Resources"  name="menu_resources"/>
+                <menu label="Tools"      name="menu_tools"/>
+                <menu label="Filters"    name="menu_filters"/>
+                <menu label="Help"       name="menu_help"/>
+            </menus>
+        </object>
+
+        <object class="wxPanel" name="panel_main" base="EditPanel">
+            <style>wxTAB_TRAVERSAL</style>
+
+            <object class="wxBoxSizer" name="sizer_root" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <!-- TOP NOTEBOOK (tabs row) -->
+                <object class="sizeritem">
+                    <option>1</option>
+                    <border>4</border>
+                    <flag>wxALL|wxEXPAND</flag>
+
+                    <object class="wxNotebook" name="nb_top" base="EditNotebook">
+                        <style>wxNB_TOP</style>
+
+                        <tabs>
+                            <tab window="page_search"      label="Search"/>
+                            <tab window="page_monitor"     label="Monitor"/>
+                            <tab window="page_connections" label="Connections"/>
+                            <tab window="page_library"     label="Library"/>
+                            <tab window="page_console"     label="Console"/>
+                            <tab window="page_logging"     label="Logging"/>
+                            <tab window="page_new"         label="New @ Lime"/>
+                        </tabs>
+
+                        <!-- ========================================================= -->
+                        <!-- SEARCH TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_search" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_search_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <!-- Search header / query row (placeholder) -->
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_search_header" base="EditStaticBoxSizer">
+                                        <label>Search</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxTextCtrl" name="txt_search_query" base="EditTextCtrl"/>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_search_go" base="EditButton">
+                                                <label>Search</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <!-- Main splitter: filters / results -->
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>4</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxSplitterWindow" name="splitter_search" base="EditSplitterWindow">
+                                        <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+                                        <!-- Left filters -->
+                                        <object class="wxPanel" name="panel_search_left" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+
+                                            <object class="wxBoxSizer" name="sizer_search_left" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>0</option>
+                                                    <border>4</border>
+                                                    <flag>wxALL</flag>
+                                                    <object class="wxStaticText" name="lbl_filter_results" base="EditStaticText">
+                                                        <label>Filter Results:</label>
+                                                    </object>
+                                                </object>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>4</border>
+                                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_media" base="EditStaticBoxSizer">
+                                                        <label>Media</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListBox" name="list_media" base="EditListBox">
+                                                                <choices>
+                                                                    <choice>All</choice>
+                                                                    <choice>Audio</choice>
+                                                                    <choice>Programs</choice>
+                                                                    <choice>Video</choice>
+                                                                </choices>
+                                                            </object>
+                                                        </object>
+                                                    </object>
+                                                </object>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>4</border>
+                                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_artist" base="EditStaticBoxSizer">
+                                                        <label>Artist</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListBox" name="list_artist" base="EditListBox"/>
+                                                        </object>
+                                                    </object>
+                                                </object>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>4</border>
+                                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_album" base="EditStaticBoxSizer">
+                                                        <label>Album</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListBox" name="list_album" base="EditListBox"/>
+                                                        </object>
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                        <!-- Right results -->
+                                        <object class="wxPanel" name="panel_search_right" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+
+                                            <object class="wxBoxSizer" name="sizer_search_right" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <!-- Results title / info bar -->
+                                                <object class="sizeritem">
+                                                    <option>0</option>
+                                                    <border>4</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticText" name="lbl_results_title" base="EditStaticText">
+                                                        <label>Search Results</label>
+                                                    </object>
+                                                </object>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>4</border>
+                                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                                    <object class="wxListCtrl" name="list_results" base="EditListCtrl">
+                                                        <style>wxLC_REPORT|wxLC_SINGLE_SEL|wxBORDER_SUNKEN</style>
+                                                    </object>
+                                                </object>
+
+                                                <object class="sizeritem">
+                                                    <option>0</option>
+                                                    <border>6</border>
+                                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_CENTER_HORIZONTAL</flag>
+                                                    <object class="wxBoxSizer" name="sizer_search_actions" base="EditBoxSizer">
+                                                        <orient>wxHORIZONTAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>0</option>
+                                                            <border>6</border>
+                                                            <flag>wxALL</flag>
+                                                            <object class="wxButton" name="btn_download" base="EditButton">
+                                                                <label>Download</label>
+                                                            </object>
+                                                        </object>
+
+                                                        <object class="sizeritem">
+                                                            <option>0</option>
+                                                            <border>6</border>
+                                                            <flag>wxALL</flag>
+                                                            <object class="wxButton" name="btn_browse_host" base="EditButton">
+                                                                <label>Browse Host</label>
+                                                            </object>
+                                                        </object>
+
+                                                        <object class="sizeritem">
+                                                            <option>0</option>
+                                                            <border>6</border>
+                                                            <flag>wxALL</flag>
+                                                            <object class="wxButton" name="btn_stop_search" base="EditButton">
+                                                                <label>Stop Search</label>
+                                                            </object>
+                                                        </object>
+
+                                                        <object class="sizeritem">
+                                                            <option>0</option>
+                                                            <border>6</border>
+                                                            <flag>wxALL</flag>
+                                                            <object class="wxButton" name="btn_junk" base="EditButton">
+                                                                <label>Junk</label>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <!-- Downloads section -->
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>4</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_downloads" base="EditStaticBoxSizer">
+                                        <label>Downloads</label>
+                                        <orient>wxVERTICAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>4</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxListCtrl" name="list_downloads" base="EditListCtrl">
+                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>4</border>
+                                            <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                            <object class="wxGauge" name="gauge_progress" base="EditGauge">
+                                                <range>100</range>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- MONITOR TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_monitor" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_monitor_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <object class="wxStaticBoxSizer" name="box_monitor_summary" base="EditStaticBoxSizer">
+                                        <label>Activity Summary</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxStaticText" name="lbl_monitor_left" base="EditStaticText">
+                                                <label>Downloads: 0 active, 0 queued</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxStaticText" name="lbl_monitor_right" base="EditStaticText">
+                                                <label>Uploads: 0 active, 0 queued</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>4</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                    <object class="wxSplitterWindow" name="splitter_monitor" base="EditSplitterWindow">
+                                        <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+                                        <object class="wxPanel" name="panel_monitor_left" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_monitor_left" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_monitor_downloads" base="EditStaticBoxSizer">
+                                                        <label>Downloads</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListCtrl" name="list_monitor_downloads" base="EditListCtrl">
+                                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                        <object class="wxPanel" name="panel_monitor_right" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_monitor_right" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_monitor_uploads" base="EditStaticBoxSizer">
+                                                        <label>Uploads</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListCtrl" name="list_monitor_uploads" base="EditListCtrl">
+                                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                                    <object class="wxStaticBoxSizer" name="box_monitor_log" base="EditStaticBoxSizer">
+                                        <label>Status / Details</label>
+                                        <orient>wxVERTICAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>4</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxTextCtrl" name="txt_monitor_status" base="EditTextCtrl">
+                                                <style>wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN</style>
+                                                <size>-1,90</size>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- CONNECTIONS TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_connections" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_connections_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_conn_header" base="EditStaticBoxSizer">
+                                        <label>Connection</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxStaticText" name="lbl_conn_status" base="EditStaticText">
+                                                <label>Status: Disconnected (placeholder)</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_conn_connect" base="EditButton">
+                                                <label>Connect</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_conn_disconnect" base="EditButton">
+                                                <label>Disconnect</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_peers" base="EditStaticBoxSizer">
+                                        <label>Peers</label>
+                                        <orient>wxVERTICAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>4</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxListCtrl" name="list_peers" base="EditListCtrl">
+                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_conn_messages" base="EditStaticBoxSizer">
+                                        <label>Messages</label>
+                                        <orient>wxVERTICAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>4</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxTextCtrl" name="txt_conn_messages" base="EditTextCtrl">
+                                                <style>wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN</style>
+                                                <size>-1,90</size>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- LIBRARY TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_library" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_library_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+
+                                    <object class="wxSplitterWindow" name="splitter_library" base="EditSplitterWindow">
+                                        <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+                                        <object class="wxPanel" name="panel_library_left" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_library_left" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_library_categories" base="EditStaticBoxSizer">
+                                                        <label>Categories</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListBox" name="list_library_categories" base="EditListBox">
+                                                                <choices>
+                                                                    <choice>All</choice>
+                                                                    <choice>Audio</choice>
+                                                                    <choice>Video</choice>
+                                                                    <choice>Images</choice>
+                                                                    <choice>Documents</choice>
+                                                                    <choice>Programs</choice>
+                                                                </choices>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                        <object class="wxPanel" name="panel_library_right" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_library_right" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_library_files" base="EditStaticBoxSizer">
+                                                        <label>Library Files</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListCtrl" name="list_library_files" base="EditListCtrl">
+                                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_library_controls" base="EditStaticBoxSizer">
+                                        <label>Sharing / Maintenance</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxStaticText" name="lbl_library_hint" base="EditStaticText">
+                                                <label>Placeholder controls (rescan, share, etc.)</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_library_rescan" base="EditButton">
+                                                <label>Rescan</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_library_open_folder" base="EditButton">
+                                                <label>Open Folder</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- CONSOLE TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_console" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_console_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_console" base="EditStaticBoxSizer">
+                                        <label>Console Output</label>
+                                        <orient>wxVERTICAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>4</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxTextCtrl" name="txt_console_out" base="EditTextCtrl">
+                                                <style>wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN</style>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxStaticBoxSizer" name="box_console_in" base="EditStaticBoxSizer">
+                                        <label>Command</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxEXPAND</flag>
+                                            <object class="wxTextCtrl" name="txt_console_in" base="EditTextCtrl"/>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_console_send" base="EditButton">
+                                                <label>Send</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- LOGGING TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_logging" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_logging_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+
+                                    <object class="wxSplitterWindow" name="splitter_logging" base="EditSplitterWindow">
+                                        <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+                                        <object class="wxPanel" name="panel_logging_left" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_logging_left" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_log_channels" base="EditStaticBoxSizer">
+                                                        <label>Channels</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListBox" name="list_log_channels" base="EditListBox">
+                                                                <choices>
+                                                                    <choice>Info</choice>
+                                                                    <choice>Warning</choice>
+                                                                    <choice>Error</choice>
+                                                                    <choice>Network</choice>
+                                                                    <choice>Search</choice>
+                                                                </choices>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                        <object class="wxPanel" name="panel_logging_right" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_logging_right" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_log_view" base="EditStaticBoxSizer">
+                                                        <label>Log View</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxTextCtrl" name="txt_log_view" base="EditTextCtrl">
+                                                                <style>wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxALIGN_RIGHT</flag>
+
+                                    <object class="wxBoxSizer" name="sizer_logging_buttons" base="EditBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL</flag>
+                                            <object class="wxButton" name="btn_log_save" base="EditButton">
+                                                <label>Save...</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL</flag>
+                                            <object class="wxButton" name="btn_log_clear" base="EditButton">
+                                                <label>Clear</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                        <!-- ========================================================= -->
+                        <!-- NEW @ LIME TAB -->
+                        <!-- ========================================================= -->
+                        <object class="wxPanel" name="page_new" base="EditPanel">
+                            <style>wxTAB_TRAVERSAL</style>
+
+                            <object class="wxBoxSizer" name="sizer_new_root" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                    <option>0</option>
+                                    <border>6</border>
+                                    <flag>wxALL|wxEXPAND</flag>
+                                    <object class="wxStaticBoxSizer" name="box_new_banner" base="EditStaticBoxSizer">
+                                        <label>New @ Lime</label>
+                                        <orient>wxHORIZONTAL</orient>
+
+                                        <object class="sizeritem">
+                                            <option>1</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxStaticText" name="lbl_new_banner" base="EditStaticText">
+                                                <label>Announcements, tips, and updates (placeholder)</label>
+                                            </object>
+                                        </object>
+
+                                        <object class="sizeritem">
+                                            <option>0</option>
+                                            <border>6</border>
+                                            <flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                            <object class="wxButton" name="btn_new_refresh" base="EditButton">
+                                                <label>Refresh</label>
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                    <option>1</option>
+                                    <border>6</border>
+                                    <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                                    <object class="wxSplitterWindow" name="splitter_new" base="EditSplitterWindow">
+                                        <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+                                        <object class="wxPanel" name="panel_new_left" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_new_left" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_new_list" base="EditStaticBoxSizer">
+                                                        <label>Items</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxListCtrl" name="list_new_items" base="EditListCtrl">
+                                                                <style>wxLC_REPORT|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                        <object class="wxPanel" name="panel_new_right" base="EditPanel">
+                                            <style>wxTAB_TRAVERSAL</style>
+                                            <object class="wxBoxSizer" name="sizer_new_right" base="EditBoxSizer">
+                                                <orient>wxVERTICAL</orient>
+
+                                                <object class="sizeritem">
+                                                    <option>1</option>
+                                                    <border>6</border>
+                                                    <flag>wxALL|wxEXPAND</flag>
+                                                    <object class="wxStaticBoxSizer" name="box_new_details" base="EditStaticBoxSizer">
+                                                        <label>Details</label>
+                                                        <orient>wxVERTICAL</orient>
+
+                                                        <object class="sizeritem">
+                                                            <option>1</option>
+                                                            <border>4</border>
+                                                            <flag>wxALL|wxEXPAND</flag>
+                                                            <object class="wxTextCtrl" name="txt_new_details" base="EditTextCtrl">
+                                                                <style>wxTE_MULTILINE|wxTE_READONLY|wxBORDER_SUNKEN</style>
+                                                            </object>
+                                                        </object>
+
+                                                    </object>
+                                                </object>
+
+                                            </object>
+                                        </object>
+
+                                    </object>
+                                </object>
+
+                            </object>
+                        </object>
+
+                    </object>
+                </object>
+
+            </object>
+        </object>
+
+    </object>
+</application>
