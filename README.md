@@ -6,6 +6,10 @@ To set up the wxPerl environment on Windows, please see this page:
 
 Gallery of Example GUIs:
 
+# Windows Help GUI (Windows 95/98)
+
+<img width="856" height="563" alt="image" src="https://github.com/user-attachments/assets/041716c6-c4ab-4e21-93e1-117f58ffe0c0" />
+
 # Netscape 2.0 Clone
 <img width="971" height="676" alt="image" src="https://github.com/user-attachments/assets/c572a291-9a77-4c48-bf9f-c4823d04ba8f" />
 
