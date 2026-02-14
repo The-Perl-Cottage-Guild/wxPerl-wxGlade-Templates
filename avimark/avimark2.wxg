@@ -1,0 +1,839 @@
+<?xml version="1.0"?>
+<!-- wxGlade 1.1.x sampling: AVImark-ish dense GUI with 3 tables total, wxPerl target -->
+
+<application class="MyApp" encoding="UTF-8" for_version="3.0" indent_amount="4" indent_symbol="space"
+             is_template="0" language="perl" mark_blocks="1" name="app" overwrite="0"
+             path="avimark_dense_sample.pl" top_window="frame_avimark" use_gettext="0" use_new_namespace="1">
+
+  <object class="AVImarkDenseFrame" name="frame_avimark" base="EditFrame">
+    <size>1320, 860</size>
+    <title>AVImark Dense Sample (wxGlade/wxPerl) - 3 Tables</title>
+    <style>wxDEFAULT_FRAME_STYLE</style>
+    <menubar>1</menubar>
+
+    <object class="wxMenuBar" name="menubar_main" base="EditMenuBar">
+      <menus>
+        <menu label="File" name="mnu_file">
+          <item><label>Open...</label><name>mnu_file_open</name></item>
+          <item><label>Print...</label><name>mnu_file_print</name></item>
+          <item><label>---</label><name>mnu_file_sep1</name></item>
+          <item><label>Exit</label><name>mnu_file_exit</name></item>
+        </menu>
+        <menu label="Patients" name="mnu_patients">
+          <item><label>New Client</label><name>mnu_pat_new_client</name></item>
+          <item><label>New Patient</label><name>mnu_pat_new_patient</name></item>
+          <item><label>Merge...</label><name>mnu_pat_merge</name></item>
+        </menu>
+        <menu label="Schedule" name="mnu_schedule">
+          <item><label>New Appointment</label><name>mnu_sch_new_appt</name></item>
+          <item><label>Check-in</label><name>mnu_sch_checkin</name></item>
+          <item><label>Whiteboard</label><name>mnu_sch_whiteboard</name></item>
+        </menu>
+        <menu label="Billing" name="mnu_billing">
+          <item><label>New Invoice</label><name>mnu_bill_new_invoice</name></item>
+          <item><label>Payment</label><name>mnu_bill_payment</name></item>
+          <item><label>Refund</label><name>mnu_bill_refund</name></item>
+        </menu>
+        <menu label="Tools" name="mnu_tools">
+          <item><label>Options...</label><name>mnu_tools_options</name></item>
+          <item><label>Reminders</label><name>mnu_tools_reminders</name></item>
+          <item><label>Reports</label><name>mnu_tools_reports</name></item>
+        </menu>
+      </menus>
+    </object>
+
+    <object class="wxPanel" name="panel_root" base="EditPanel">
+      <style>wxTAB_TRAVERSAL</style>
+
+      <object class="wxBoxSizer" name="sizer_root" base="EditBoxSizer">
+        <orient>wxVERTICAL</orient>
+
+        <!-- Dense "status strip" -->
+        <object class="sizeritem">
+          <option>0</option>
+          <border>6</border>
+          <flag>wxALL|wxEXPAND</flag>
+          <object class="wxBoxSizer" name="sizer_top_strip" base="EditBoxSizer">
+            <orient>wxHORIZONTAL</orient>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>0</border>
+              <flag>wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxStaticText" name="lbl_clinic" base="EditStaticText">
+                <label>Clinic:</label>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>6</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxChoice" name="choice_clinic" base="EditChoice">
+                <selection>0</selection>
+                <choices>
+                  <choice>Main</choice>
+                  <choice>Satellite</choice>
+                  <choice>Mobile</choice>
+                </choices>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>12</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxStaticText" name="lbl_user" base="EditStaticText">
+                <label>User:</label>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>6</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxStaticText" name="txt_user" base="EditStaticText">
+                <label>doctor1</label>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>1</option>
+              <border>0</border>
+              <flag>wxEXPAND</flag>
+              <object class="spacer" name="spacer_top" base="EditSpacer">
+                <size>1,1</size><width>1</width><height>1</height>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>0</border>
+              <flag>wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxCheckBox" name="chk_offline" base="EditCheckBox">
+                <label>Offline mode</label>
+              </object>
+            </object>
+
+            <object class="sizeritem">
+              <option>0</option>
+              <border>12</border>
+              <flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+              <object class="wxGauge" name="gauge_bg" base="EditGauge">
+                <range>100</range>
+                <value>18</value>
+                <size>140,16</size>
+              </object>
+            </object>
+
+          </object>
+        </object>
+
+        <!-- Main content -->
+        <object class="sizeritem">
+          <option>1</option>
+          <border>6</border>
+          <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+          <object class="wxSplitterWindow" name="split_main" base="EditSplitterWindow">
+            <style>wxSP_LIVE_UPDATE|wxSP_3D</style>
+
+            <!-- LEFT PANE: Dense navigation + TABLE #1 -->
+            <object class="wxPanel" name="panel_left" base="EditPanel">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer" name="sizer_left" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <object class="sizeritem">
+                  <option>0</option>
+                  <border>6</border>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <object class="wxStaticBoxSizer" name="box_find" base="EditStaticBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <label>Find Client / Patient</label>
+
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <object class="wxTextCtrl" name="txt_find" base="EditTextCtrl">
+                        <size>-1,28</size>
+                      </object>
+                    </object>
+
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                      <object class="wxBoxSizer" name="sizer_find_btns" base="EditBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+
+                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxButton" name="btn_find" base="EditButton"><label>Find</label></object>
+                        </object>
+                        <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxButton" name="btn_recent" base="EditButton"><label>Recent</label></object>
+                        </object>
+                        <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                          <object class="spacer" name="spacer_find" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                        </object>
+                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxButton" name="btn_new" base="EditButton"><label>New...</label></object>
+                        </object>
+                      </object>
+                    </object>
+
+                    <object class="sizeritem">
+                      <option>0</option>
+                      <border>6</border>
+                      <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                      <object class="wxBoxSizer" name="sizer_quick_filters" base="EditBoxSizer">
+                        <orient>wxHORIZONTAL</orient>
+                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxCheckBox" name="chk_active" base="EditCheckBox"><label>Active</label></object>
+                        </object>
+                        <object class="sizeritem"><option>0</option><border>10</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxCheckBox" name="chk_balance" base="EditCheckBox"><label>Has balance</label></object>
+                        </object>
+                        <object class="sizeritem"><option>0</option><border>10</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                          <object class="wxCheckBox" name="chk_alerts" base="EditCheckBox"><label>Alerts</label></object>
+                        </object>
+                      </object>
+                    </object>
+
+                  </object>
+                </object>
+
+                <object class="sizeritem">
+                  <option>0</option>
+                  <border>6</border>
+                  <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                  <object class="wxStaticBoxSizer" name="box_nav" base="EditStaticBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <label>Navigation</label>
+
+                    <object class="sizeritem">
+                      <option>1</option>
+                      <border>6</border>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <object class="wxTreeCtrl" name="tree_nav" base="EditTreeCtrl">
+                        <style>wxTR_HAS_BUTTONS|wxTR_LINES_AT_ROOT|wxBORDER_SUNKEN</style>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+
+                <!-- TABLE #1: Client/Patient list -->
+                <object class="sizeritem">
+                  <option>1</option>
+                  <border>6</border>
+                  <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                  <object class="wxStaticBoxSizer" name="box_patients" base="EditStaticBoxSizer">
+                    <orient>wxVERTICAL</orient>
+                    <label>Clients / Patients</label>
+
+                    <object class="sizeritem">
+                      <option>1</option>
+                      <border>6</border>
+                      <flag>wxALL|wxEXPAND</flag>
+                      <object class="wxListCtrl" name="list_clients_patients" base="EditListCtrl">
+                        <style>wxLC_REPORT|wxLC_SINGLE_SEL|wxBORDER_SUNKEN</style>
+                      </object>
+                    </object>
+                  </object>
+                </object>
+
+              </object>
+            </object>
+
+            <!-- RIGHT PANE: bottom notebook (AVImark-ish) with tabs-in-tabs -->
+            <object class="wxPanel" name="panel_right" base="EditPanel">
+              <style>wxTAB_TRAVERSAL</style>
+              <object class="wxBoxSizer" name="sizer_right" base="EditBoxSizer">
+                <orient>wxVERTICAL</orient>
+
+                <object class="sizeritem">
+                  <option>0</option>
+                  <border>6</border>
+                  <flag>wxALL|wxEXPAND</flag>
+                  <object class="wxStaticBoxSizer" name="box_header" base="EditStaticBoxSizer">
+                    <orient>wxHORIZONTAL</orient>
+                    <label>Context</label>
+
+                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                      <object class="wxStaticText" name="lbl_ctx1" base="EditStaticText"><label>Client:</label></object>
+                    </object>
+                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                      <object class="wxTextCtrl" name="txt_client" base="EditTextCtrl"><size>-1,26</size></object>
+                    </object>
+                    <object class="sizeritem"><option>0</option><border>10</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                      <object class="wxStaticText" name="lbl_ctx2" base="EditStaticText"><label>Patient:</label></object>
+                    </object>
+                    <object class="sizeritem"><option>1</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL|wxEXPAND</flag>
+                      <object class="wxTextCtrl" name="txt_patient" base="EditTextCtrl"><size>-1,26</size></object>
+                    </object>
+                  </object>
+                </object>
+
+                <!-- Bottom tabs (wxNB_BOTTOM) -->
+                <object class="sizeritem">
+                  <option>1</option>
+                  <border>6</border>
+                  <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+
+                  <object class="wxNotebook" name="nb_bottom" base="EditNotebook">
+                    <style>wxNB_BOTTOM</style>
+                    <tabs>
+                      <tab window="page_patients">Patients</tab>
+                      <tab window="page_schedule">Schedule</tab>
+                      <tab window="page_billing">Billing</tab>
+                      <tab window="page_config">Config</tab>
+                    </tabs>
+
+                    <!-- Patients page: tabs-in-tabs (top) -->
+                    <object class="wxPanel" name="page_patients" base="EditPanel">
+                      <style>wxTAB_TRAVERSAL</style>
+                      <object class="wxBoxSizer" name="sizer_patients" base="EditBoxSizer">
+                        <orient>wxVERTICAL</orient>
+
+                        <object class="sizeritem">
+                          <option>1</option>
+                          <border>6</border>
+                          <flag>wxALL|wxEXPAND</flag>
+                          <object class="wxNotebook" name="nb_patients_inner" base="EditNotebook">
+                            <style>wxNB_TOP</style>
+                            <tabs>
+                              <tab window="pat_overview">Overview</tab>
+                              <tab window="pat_medical">Medical</tab>
+                              <tab window="pat_reminders">Reminders</tab>
+                              <tab window="pat_docs">Documents</tab>
+                            </tabs>
+
+                            <object class="wxPanel" name="pat_overview" base="EditPanel">
+                              <style>wxTAB_TRAVERSAL</style>
+                              <object class="wxBoxSizer" name="sizer_pat_overview" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                  <option>0</option>
+                                  <border>6</border>
+                                  <flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxFlexGridSizer" name="grid_overview" base="EditFlexGridSizer">
+                                    <rows>0</rows><cols>4</cols><hgap>8</hgap><vgap>6</vgap>
+                                    <growable_cols>1</growable_cols>
+                                    <growable_cols>3</growable_cols>
+
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_species" base="EditStaticText"><label>Species</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxChoice" name="choice_species" base="EditChoice">
+                                        <selection>0</selection>
+                                        <choices><choice>Canine</choice><choice>Feline</choice><choice>Avian</choice><choice>Exotic</choice></choices>
+                                      </object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_sex" base="EditStaticText"><label>Sex</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxChoice" name="choice_sex" base="EditChoice">
+                                        <selection>0</selection>
+                                        <choices><choice>M</choice><choice>F</choice><choice>Neutered</choice><choice>Spayed</choice></choices>
+                                      </object>
+                                    </object>
+
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_dob" base="EditStaticText"><label>DOB</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxTextCtrl" name="txt_dob" base="EditTextCtrl"/>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_weight" base="EditStaticText"><label>Weight</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxTextCtrl" name="txt_weight" base="EditTextCtrl"/>
+                                    </object>
+
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_alert" base="EditStaticText"><label>Alerts</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxCheckBox" name="chk_aggressive" base="EditCheckBox"><label>Aggressive</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxStaticText" name="lbl_flags" base="EditStaticText"><label>Flags</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="wxBoxSizer" name="sizer_flags" base="EditBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxCheckBox" name="chk_microchip" base="EditCheckBox"><label>Microchip</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>10</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxCheckBox" name="chk_vip" base="EditCheckBox"><label>VIP</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>10</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxCheckBox" name="chk_deceased" base="EditCheckBox"><label>Deceased</label></object>
+                                        </object>
+                                      </object>
+                                    </object>
+
+                                  </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                  <option>1</option>
+                                  <border>6</border>
+                                  <flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxStaticBoxSizer" name="box_notes" base="EditStaticBoxSizer">
+                                    <orient>wxVERTICAL</orient>
+                                    <label>Client/Patient Notes</label>
+                                    <object class="sizeritem">
+                                      <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                      <object class="wxTextCtrl" name="txt_notes" base="EditTextCtrl">
+                                        <style>wxTE_MULTILINE</style>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+
+                              </object>
+                            </object>
+
+                            <object class="wxPanel" name="pat_medical" base="EditPanel">
+                              <style>wxTAB_TRAVERSAL</style>
+                              <object class="wxBoxSizer" name="sizer_pat_med" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+
+                                <object class="sizeritem">
+                                  <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxStaticBoxSizer" name="box_med_flags" base="EditStaticBoxSizer">
+                                    <orient>wxHORIZONTAL</orient>
+                                    <label>Medical Flags</label>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxCheckBox" name="chk_allergy" base="EditCheckBox"><label>Allergy</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxCheckBox" name="chk_chronic" base="EditCheckBox"><label>Chronic</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxCheckBox" name="chk_anesthesia" base="EditCheckBox"><label>Anesthesia risk</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="spacer" name="spacer_med" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxButton" name="btn_add_problem" base="EditButton"><label>Add Problem...</label></object>
+                                    </object>
+                                  </object>
+                                </object>
+
+                                <object class="sizeritem">
+                                  <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxStaticBoxSizer" name="box_med_history" base="EditStaticBoxSizer">
+                                    <orient>wxVERTICAL</orient>
+                                    <label>History / SOAP (text)</label>
+                                    <object class="sizeritem"><option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                      <object class="wxTextCtrl" name="txt_soap" base="EditTextCtrl">
+                                        <style>wxTE_MULTILINE</style>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+
+                              </object>
+                            </object>
+
+                            <object class="wxPanel" name="pat_reminders" base="EditPanel">
+                              <style>wxTAB_TRAVERSAL</style>
+                              <object class="wxBoxSizer" name="sizer_pat_rem" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxStaticBoxSizer" name="box_rem" base="EditStaticBoxSizer">
+                                    <orient>wxVERTICAL</orient>
+                                    <label>Reminders (dense controls)</label>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                      <object class="wxFlexGridSizer" name="grid_rem" base="EditFlexGridSizer">
+                                        <rows>0</rows><cols>2</cols><hgap>8</hgap><vgap>6</vgap>
+                                        <growable_cols>1</growable_cols>
+                                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxStaticText" name="lbl_r1" base="EditStaticText"><label>Rabies due</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                          <object class="wxTextCtrl" name="txt_rabies" base="EditTextCtrl"/>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxStaticText" name="lbl_r2" base="EditStaticText"><label>Wellness due</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                          <object class="wxTextCtrl" name="txt_wellness" base="EditTextCtrl"/>
+                                        </object>
+                                      </object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                      <object class="wxBoxSizer" name="sizer_rem_btns" base="EditBoxSizer">
+                                        <orient>wxHORIZONTAL</orient>
+                                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxButton" name="btn_gen_postcard" base="EditButton"><label>Postcard</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxButton" name="btn_gen_email" base="EditButton"><label>Email</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxButton" name="btn_gen_sms" base="EditButton"><label>SMS</label></object>
+                                        </object>
+                                        <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                          <object class="spacer" name="spacer_rem" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                                        </object>
+                                        <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                          <object class="wxButton" name="btn_rem_save" base="EditButton"><label>Save</label></object>
+                                        </object>
+                                      </object>
+                                    </object>
+                                  </object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_rem_log" base="EditTextCtrl">
+                                    <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                                  </object>
+                                </object>
+                              </object>
+                            </object>
+
+                            <object class="wxPanel" name="pat_docs" base="EditPanel">
+                              <style>wxTAB_TRAVERSAL</style>
+                              <object class="wxBoxSizer" name="sizer_pat_docs" base="EditBoxSizer">
+                                <orient>wxVERTICAL</orient>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxBoxSizer" name="sizer_docs_toolbar" base="EditBoxSizer">
+                                    <orient>wxHORIZONTAL</orient>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxButton" name="btn_doc_add" base="EditButton"><label>Add...</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxButton" name="btn_doc_scan" base="EditButton"><label>Scan</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxButton" name="btn_doc_print" base="EditButton"><label>Print</label></object>
+                                    </object>
+                                    <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                      <object class="spacer" name="spacer_docs" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                                    </object>
+                                    <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                      <object class="wxCheckBox" name="chk_doc_private" base="EditCheckBox"><label>Private</label></object>
+                                    </object>
+                                  </object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_doc_preview" base="EditTextCtrl">
+                                    <style>wxTE_MULTILINE</style>
+                                  </object>
+                                </object>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                    <!-- Schedule page: TABLE #2 -->
+                    <object class="wxPanel" name="page_schedule" base="EditPanel">
+                      <style>wxTAB_TRAVERSAL</style>
+                      <object class="wxBoxSizer" name="sizer_schedule" base="EditBoxSizer">
+                        <orient>wxVERTICAL</orient>
+
+                        <object class="sizeritem">
+                          <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxStaticBoxSizer" name="box_sched_filters" base="EditStaticBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+                            <label>Schedule Controls</label>
+
+                            <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxStaticText" name="lbl_date" base="EditStaticText"><label>Date</label></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxTextCtrl" name="txt_sched_date" base="EditTextCtrl"><size>110,26</size></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxButton" name="btn_sched_pick" base="EditButton"><label>...</label><size>28,22</size></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>12</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxCheckBox" name="chk_sched_show_checkedin" base="EditCheckBox"><label>Show checked-in</label></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>12</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxCheckBox" name="chk_sched_show_canceled" base="EditCheckBox"><label>Show canceled</label></object>
+                            </object>
+                            <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                              <object class="spacer" name="spacer_sched" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxButton" name="btn_sched_new" base="EditButton"><label>New Appt</label></object>
+                            </object>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxStaticBoxSizer" name="box_schedule" base="EditStaticBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <label>Appointments</label>
+                            <object class="sizeritem">
+                              <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxListCtrl" name="list_schedule" base="EditListCtrl">
+                                <style>wxLC_REPORT|wxLC_SINGLE_SEL|wxBORDER_SUNKEN</style>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>0</option><border>6</border><flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+                          <object class="wxBoxSizer" name="sizer_sched_bottom" base="EditBoxSizer">
+                            <orient>wxHORIZONTAL</orient>
+                            <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxButton" name="btn_checkin" base="EditButton"><label>Check-in</label></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxButton" name="btn_checkout" base="EditButton"><label>Checkout</label></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxButton" name="btn_whiteboard" base="EditButton"><label>Whiteboard</label></object>
+                            </object>
+                            <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                              <object class="spacer" name="spacer_sched_bottom" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                            </object>
+                            <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                              <object class="wxStaticText" name="lbl_sched_status" base="EditStaticText"><label>3 rooms • 1 doctor • 0 conflicts</label></object>
+                            </object>
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                    <!-- Billing page: TABLE #3 -->
+                    <object class="wxPanel" name="page_billing" base="EditPanel">
+                      <style>wxTAB_TRAVERSAL</style>
+                      <object class="wxBoxSizer" name="sizer_billing" base="EditBoxSizer">
+                        <orient>wxVERTICAL</orient>
+
+                        <object class="sizeritem">
+                          <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxStaticBoxSizer" name="box_bill_controls" base="EditStaticBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <label>Invoice / Posting</label>
+
+                            <object class="sizeritem">
+                              <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxFlexGridSizer" name="grid_bill" base="EditFlexGridSizer">
+                                <rows>0</rows><cols>4</cols><hgap>8</hgap><vgap>6</vgap>
+                                <growable_cols>1</growable_cols>
+                                <growable_cols>3</growable_cols>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_inv" base="EditStaticText"><label>Invoice #</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_invoice" base="EditTextCtrl"/>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_loc" base="EditStaticText"><label>Location</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxChoice" name="choice_bill_loc" base="EditChoice">
+                                    <selection>0</selection>
+                                    <choices><choice>Main</choice><choice>Satellite</choice></choices>
+                                  </object>
+                                </object>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_code" base="EditStaticText"><label>Code</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_post_code" base="EditTextCtrl"/>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_qty" base="EditStaticText"><label>Qty</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_qty" base="EditTextCtrl"/>
+                                </object>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_price" base="EditStaticText"><label>Price</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_price" base="EditTextCtrl"/>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_tax" base="EditStaticText"><label>Tax</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxCheckBox" name="chk_tax" base="EditCheckBox"><label>Taxable</label></object>
+                                </object>
+
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxBoxSizer" name="sizer_bill_btns" base="EditBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_post" base="EditButton"><label>Post</label></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_payment" base="EditButton"><label>Payment</label></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_refund" base="EditButton"><label>Refund</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="spacer" name="spacer_bill" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_total" base="EditStaticText"><label>Total: $0.00</label></object>
+                                </object>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxStaticBoxSizer" name="box_ledger" base="EditStaticBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <label>Ledger</label>
+                            <object class="sizeritem">
+                              <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxListCtrl" name="list_ledger" base="EditListCtrl">
+                                <style>wxLC_REPORT|wxLC_SINGLE_SEL|wxBORDER_SUNKEN</style>
+                              </object>
+                            </object>
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                    <!-- Config page (dense, no tables) -->
+                    <object class="wxPanel" name="page_config" base="EditPanel">
+                      <style>wxTAB_TRAVERSAL</style>
+                      <object class="wxBoxSizer" name="sizer_config" base="EditBoxSizer">
+                        <orient>wxVERTICAL</orient>
+
+                        <object class="sizeritem">
+                          <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxStaticBoxSizer" name="box_cfg" base="EditStaticBoxSizer">
+                            <orient>wxVERTICAL</orient>
+                            <label>Options</label>
+
+                            <object class="sizeritem">
+                              <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxFlexGridSizer" name="grid_cfg" base="EditFlexGridSizer">
+                                <rows>0</rows><cols>2</cols><hgap>10</hgap><vgap>6</vgap>
+                                <growable_cols>1</growable_cols>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_db" base="EditStaticText"><label>Database</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_db" base="EditTextCtrl"/>
+                                </object>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_server" base="EditStaticText"><label>Server</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxTextCtrl" name="txt_server" base="EditTextCtrl"/>
+                                </object>
+
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxStaticText" name="lbl_prn" base="EditStaticText"><label>Default printer</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="wxChoice" name="choice_prn" base="EditChoice">
+                                    <selection>0</selection>
+                                    <choices><choice>Front Desk</choice><choice>Treatment</choice><choice>Lab</choice></choices>
+                                  </object>
+                                </object>
+
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxStaticBoxSizer" name="box_cfg_flags" base="EditStaticBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+                                <label>Behavior</label>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxCheckBox" name="chk_autosave" base="EditCheckBox"><label>Autosave</label></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxCheckBox" name="chk_confirm_posts" base="EditCheckBox"><label>Confirm posts</label></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxALL|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxCheckBox" name="chk_keyboard_mode" base="EditCheckBox"><label>Keyboard mode</label></object>
+                                </object>
+                              </object>
+                            </object>
+
+                            <object class="sizeritem">
+                              <option>0</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                              <object class="wxBoxSizer" name="sizer_cfg_btns" base="EditBoxSizer">
+                                <orient>wxHORIZONTAL</orient>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_cfg_test" base="EditButton"><label>Test</label></object>
+                                </object>
+                                <object class="sizeritem"><option>1</option><border>0</border><flag>wxEXPAND</flag>
+                                  <object class="spacer" name="spacer_cfg" base="EditSpacer"><size>1,1</size><width>1</width><height>1</height></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>0</border><flag>wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_cfg_apply" base="EditButton"><label>Apply</label></object>
+                                </object>
+                                <object class="sizeritem"><option>0</option><border>6</border><flag>wxLEFT|wxALIGN_CENTER_VERTICAL</flag>
+                                  <object class="wxButton" name="btn_cfg_ok" base="EditButton"><label>OK</label></object>
+                                </object>
+                              </object>
+                            </object>
+
+                          </object>
+                        </object>
+
+                        <object class="sizeritem">
+                          <option>1</option><border>6</border><flag>wxALL|wxEXPAND</flag>
+                          <object class="wxTextCtrl" name="txt_cfg_log" base="EditTextCtrl">
+                            <style>wxTE_MULTILINE|wxTE_READONLY</style>
+                          </object>
+                        </object>
+
+                      </object>
+                    </object>
+
+                  </object>
+                </object>
+
+              </object>
+            </object>
+
+          </object>
+        </object>
+
+        <!-- Bottom status -->
+        <object class="sizeritem">
+          <option>0</option>
+          <border>6</border>
+          <flag>wxLEFT|wxRIGHT|wxBOTTOM|wxEXPAND</flag>
+          <object class="wxStaticText" name="lbl_status" base="EditStaticText">
+            <label>F1 Help • F2 Find • F3 New • F6 Schedule • F9 Billing • Esc Close</label>
+          </object>
+        </object>
+
+      </object>
+    </object>
+  </object>
+</application>
