@@ -4,7 +4,7 @@ To set up the wxPerl environment on Windows, please see this page:
 
 **See details on setting up modern, working wxPerl environment on Windows, complete with wxGlade (as of 2026!)** - [here](https://wiki.perl-guilds.net/index.php?title=Developing_and_Distributing_wxPerl_Applications_on_Windows).
 
-'''Note:''' ChatGPT and similar AI tools can be used to generate first-draft wxGlade XML files from plain-English GUI descriptions. These files should be opened, inspected, and corrected in wxGlade before generating Perl code, but they can provide a useful starting point for new wxPerl application templates.
+**Note**: ChatGPT and similar AI tools can be used to generate first-draft wxGlade XML files from plain-English GUI descriptions. These files should be opened, inspected, and corrected in wxGlade before generating Perl code, but they can provide a useful starting point for new wxPerl application templates.
 
 Gallery of Example GUIs:
 
